@@ -1,0 +1,84 @@
+﻿// -------------------------------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License (MIT). See LICENSE in the repo root for license information.
+// -------------------------------------------------------------------------------------------------
+
+using System.IdentityModel.Tokens.Jwt;
+using EnsureThat;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Health.Extensions.DependencyInjection;
+using Microsoft.Health.Fhir.Api.Configs;
+using Microsoft.Health.Fhir.Api.Features.Bundle;
+using Microsoft.Health.Fhir.Core.Configs;
+using Microsoft.Health.Fhir.Core.Features.Security;
+using Microsoft.Health.Fhir.Core.Features.Security.Authorization;
+
+namespace Microsoft.Health.Fhir.Api.Modules
+{
+    public class SecurityModule : IStartupModule
+    {
+        private readonly SecurityConfiguration _securityConfiguration;
+
+        public SecurityModule(FhirServerConfiguration fhirServerConfiguration)
+        {
+            EnsureArg.IsNotNull(fhirServerConfiguration, nameof(fhirServerConfiguration));
+            _securityConfiguration = fhirServerConfiguration.Security;
+        }
+
+        /// <inheritdoc />
+        public void Load(IServiceCollection services)
+        {
+            EnsureArg.IsNotNull(services, nameof(services));
+
+            services.AddSingleton<IBundleHttpContextAccessor, BundleHttpContextAccessor>();
+
+            // Set the token handler to not do auto inbound mapping. (e.g. "roles" -> "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+            if (_securityConfiguration.Enabled)
+            {
+                services.AddAuthentication(options =>
+                    {
+                        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                    })
+                    .AddJwtBearer(options =>
+                    {
+                        options.Authority = _securityConfiguration.Authentication.Authority;
+                        options.Audience = _securityConfiguration.Authentication.Audience;
+                        options.RequireHttpsMetadata = true;
+                        options.Challenge = $"Bearer authorization_uri=\"{_securityConfiguration.Authentication.Authority}\", resource_id=\"{_securityConfiguration.Authentication.Audience}\", realm=\"{_securityConfiguration.Authentication.Audience}\"";
+                    });
+
+                services.AddControllers(mvcOptions =>
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+
+                    mvcOptions.Filters.Add(new AuthorizeFilter(policy));
+                });
+
+                if (_securityConfiguration.Authorization.Enabled)
+                {
+                    services.Add<RoleLoader>().Transient().AsImplementedInterfaces();
+                    services.AddSingleton(_securityConfiguration.Authorization);
+
+                    services.AddSingleton<IFhirAuthorizationService, RoleBasedFhirAuthorizationService>();
+                }
+                else
+                {
+                    services.AddSingleton<IFhirAuthorizationService>(DisabledFhirAuthorizationService.Instance);
+                }
+            }
+            else
+            {
+                services.AddSingleton<IFhirAuthorizationService>(DisabledFhirAuthorizationService.Instance);
+            }
+        }
+    }
+}

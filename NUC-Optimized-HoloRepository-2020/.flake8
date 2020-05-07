@@ -1,0 +1,13 @@
+[flake8]
+ignore =
+    # line length max in black is 88 instead of 79
+    E501,
+    # allow line break before binary operator
+    W503,
+    # whitespace before ':' added by black
+    E203
+per-file-ignores =
+    # "Unused" imports and overwrites are in fact pytest-mock fixtures and injections
+    */tests/*:F401, F811
+max-line-length = 88
+max-complexity = 18
