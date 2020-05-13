@@ -1,6 +1,7 @@
 import logging
 import re
 import os
+import webbrowser
 import tkinter as tk  # python 3
 from PIL import Image, ImageTk
 from tkinter import font as tkfont  # python 3
@@ -56,6 +57,7 @@ def generate(entries, plid, ar_view):
     segment_type = list(entries["seg_types"].curselection())
     segment_type = [s + 1 for s in segment_type]
     quiet = entries["silence_log"].get()
+    iterations = entries["smoothing"].get()
 
     if plid != "brain_segmentation":
         input_dir = entries["Input"].get()
@@ -73,7 +75,7 @@ def generate(entries, plid, ar_view):
     ):
         messagebox.showerror(
             "Error",
-            "Please ensure input/s, an output path, and segmentation type is inputted",
+            "Please ensure input/s, an output path, and segmentation type is inputted.",
         )
     else:
         logging.basicConfig(
@@ -81,18 +83,23 @@ def generate(entries, plid, ar_view):
             format="%(asctime)s - %(module)s:%(levelname)s - %(message)s",
             datefmt="%d-%b-%y %H:%M:%S",
         )
+        messagebox.showinfo(
+            "Help",
+            """This may take a while...\n\nPlease click 'ok' to continue. and check the console output for progress updates.""",
+        )
         logging.info("Loading and initializing pipeline dynamically")
         pipeline_module = load_pipeline_dynamically(plid)
         if ar_view:
-            pipeline_module.run(input_dir, output_path, segment_type, False)
+            pipeline_module.run(input_dir, output_path, segment_type, iterations, False)
             holo_registration_wrapper.start_viewer(output_path, plid)
         else:
-            pipeline_module.run(input_dir, output_path, segment_type)
+            pipeline_module.run(input_dir, output_path, segment_type, iterations)
         logging.info("Done.")
 
 
 def browsefunc(entry):
     folder_selected = filedialog.askdirectory()
+    entry.delete(0, tk.END)
     entry.insert(tk.END, folder_selected)
 
 
@@ -100,6 +107,7 @@ def browsefile(entry):
     file_selected = filedialog.askopenfilename(
         filetypes=(("Compressed NifTI", "*.nii.gz"), ("All files", "*"))
     )
+    entry.delete(0, tk.END)
     entry.insert(tk.END, file_selected)
 
 
@@ -111,6 +119,7 @@ def openViewer():
     if file_selected != "":
         pipeline_module = load_pipeline_dynamically(plid)
         pipeline_module.run(file_selected)
+
 
 
 def create_form(root, plid):
@@ -147,14 +156,15 @@ def create_form(root, plid):
         )
         browse_button = tk.Button(
             input_row,
-            text="Browse Input File",
+            text="Browse NiFTI File",
             font=form_button_text_size,
             command=lambda: browsefile(input_ent),
         )
         browse_dir_button = tk.Button(
             input_row,
-            text="Browse Input Directory",
+            text="Browse DICOM Directory",
             font=form_button_text_size,
+            state=tk.NORMAL if plid != "kidney_segmentation" else tk.DISABLED,
             command=lambda: browsefunc(input_ent),
         )
         browse_button.pack(side=tk.RIGHT, fill=tk.X, padx=20)
@@ -177,13 +187,13 @@ def create_form(root, plid):
         )
         browse_button = tk.Button(
             input_row,
-            text="Browse Input File",
+            text="Browse NiFTI File",
             font=form_button_text_size,
             command=lambda: browsefile(input_ent),
         )
         browse_dir_button = tk.Button(
             input_row,
-            text="Browse Input Directory",
+            text="Browse DICOM Directory",
             font=form_button_text_size,
             command=lambda: browsefunc(input_ent),
         )
@@ -207,13 +217,13 @@ def create_form(root, plid):
         )
         browse_button_2 = tk.Button(
             input_row_2,
-            text="Browse Input File",
+            text="Browse NiFTI File",
             font=form_button_text_size,
             command=lambda: browsefile(input_ent_2),
         )
         browse_dir_button_2 = tk.Button(
             input_row_2,
-            text="Browse Input Directory",
+            text="Browse DICOM Directory",
             font=form_button_text_size,
             command=lambda: browsefunc(input_ent_2),
         )
@@ -237,13 +247,13 @@ def create_form(root, plid):
         )
         browse_button_3 = tk.Button(
             input_row_3,
-            text="Browse Input File",
+            text="Browse NiFTI File",
             font=form_button_text_size,
             command=lambda: browsefile(input_ent_3),
         )
         browse_dir_button_3 = tk.Button(
             input_row_3,
-            text="Browse Input Directory",
+            text="Browse DICOM Directory",
             font=form_button_text_size,
             command=lambda: browsefunc(input_ent_3),
         )
@@ -268,39 +278,68 @@ def create_form(root, plid):
 
     seg_types = get_seg_types(plid).keys()
 
-    next_row = tk.Frame(input_form)
-    next_row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+    smoothing_row = tk.Frame(input_form)
+    smoothing_row.pack(side=tk.TOP, fill=tk.X, padx=3, pady=5)
     type_label = tk.Label(
-        next_row,
+        smoothing_row,
+        width=15,
+        text="Smoothing level",
+        anchor="w",
+        font=("Helvetica", text_font_size, "bold"),
+    )
+    type_label.pack(side=tk.LEFT, pady=(15, 0))
+    # listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
+    smoothing_slider = tk.Scale(smoothing_row, from_=1, to=100, orient=tk.HORIZONTAL)
+    smoothing_slider.set(10)
+    smoothing_note_label = tk.Label(
+        smoothing_row,
+        text="(higher number of iterations results in more smoothing)",
+        anchor="w",
+        font=("Helvetica", text_font_size - 5),
+    )
+    # smoothing_slider.insert(
+    # tk.END, "(higher number of iterations resultls in more smoothing)"
+    # )
+    smoothing_slider.pack(side=tk.LEFT)
+    smoothing_note_label.pack(side=tk.LEFT, pady=(15, 0))
+
+    seg_row = tk.Frame(input_form)
+    seg_row.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+    type_label = tk.Label(
+        seg_row,
         text="Please select one or more types",
         anchor="w",
         font=("Helvetica", text_font_size, "bold"),
     )
     type_label.grid(row=0, column=0, padx=(0, 10))
     # listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=1)
-    scrollbar = tk.Scrollbar(next_row, orient=tk.VERTICAL)
+    scrollbar = tk.Scrollbar(seg_row, orient=tk.VERTICAL)
     listbox = tk.Listbox(
-        next_row,
+        seg_row,
         font=("Helvetica", 15),
         height=min(len(seg_types), 7),
         selectmode="multiple",
         yscrollcommand=scrollbar.set,
     )
+
     scrollbar.config(command=listbox.yview)
     if len(seg_types) >= 7:
         scrollbar.grid(row=0, column=42, sticky="nse")
 
     for item in seg_types:
         listbox.insert(tk.END, item)
+    if len(seg_types) == 1:  # if only one item pre-select it
+        listbox.selection_set(0, tk.END)
     listbox.grid(row=0, column=40, padx=10)
     entries["seg_types"] = listbox
 
     silence_log = tk.IntVar()
     silence_button = tk.Checkbutton(
-        next_row, text="Silence logging ", variable=silence_log
+        seg_row, text="Silence logging ", variable=silence_log
     )
     silence_button.grid(row=0, column=80, padx=30)
     entries["silence_log"] = silence_log
+    entries["smoothing"] = smoothing_slider
 
     return entries
 
@@ -309,12 +348,21 @@ def help_box(plid):
     if plid != "brain_segmentation":
         messagebox.showinfo(
             "Help",
-            """Input : Select a compressed NifTi file (*.nii.gz) or directory containing DICOM (*.dcm) scans through the file or folder browser\n\nOuput Directory: Specify the path to the output. e.g. path/output.glb\n\nType: Specify the segmentation/s to be generated\n\nAR View only suported on Windows OS""",
+            """Input : Select a compressed NifTi file (*.nii.gz) OR directory containing DICOM (*.dcm) scans through the file or folder browser\n
+Ouput Directory: Specify the path to the output. e.g. path/output.glb\n\n
+Type: Specify the segmentation/s to be generated\n\n
+Note: AR View is only suported on Windows OS""",
         )
     else:
         messagebox.showinfo(
             "Help",
-            """Input : Select a compressed NifTi file (*.nii.gz) or directory containing DICOM (*.dcm) scans through the file or folder browser\n\n Inputs required: T2-Flair, T1, T1-Intermediate Representation scans\n\nOuput Directory: Specify the path to the output. e.g. path/output.glb\n\nType: Specify the segmentation/s to be generated\n\nAR View only suported on Windows OS""",
+            """Input : Select a compressed NifTi file (*.nii.gz) OR directory containing DICOM (*.dcm) scans through the file or folder browser\n\n
+Inputs required: T2-Flair, T1, T1-Intermediate Representation scans\n
+For more information on the required modalities for the brain pipeline, please checkout:\n
+https://en.wikipedia.org/wiki/Magnetic_resonance_imaging#Overview_table\n\n
+Ouput Directory: Specify the path to the output. e.g. path/output.glb\n\n
+Type: Specify the segmentation/s to be generated\n\n
+Note: AR View is only suported on Windows OS""",
         )
 
 
@@ -463,12 +511,16 @@ class ParameterPage(tk.Frame):
         )
         tool_title.pack()
 
-        tool_information = get_information(plid)
+        tool_information = (
+            get_information(plid)
+            + "For more instructions please click the help button.\n"
+        )
         tool_description_label = tk.Label(self, text=tool_information, wraplength=800)
         tool_description_label.config(font=("Helvetica", text_font_size))
         tool_description_label.pack()
 
         ents = create_form(self, plid)
+        global smoothing_slider
         buttonFont = tkFont.Font(family="Helvetica", size=form_button_text_size)
         viewer_btn = tk.Button(
             self,

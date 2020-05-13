@@ -2,9 +2,10 @@ import os
 import shutil
 import subprocess
 
-UPLOAD_FOLDER = "./models/dense_vnet_abdominal_ct/input"
-OUTPUT_FOLDER = "./models/dense_vnet_abdominal_ct/output"
+UPLOAD_FOLDER = os.path.abspath("./models/dense_vnet_abdominal_ct/input")
+OUTPUT_FOLDER = os.path.abspath("./models/dense_vnet_abdominal_ct/output")
 
+DEBUG = 0
 
 class Abdominal_model:
 
@@ -26,13 +27,21 @@ class Abdominal_model:
         return self.input_path
 
     def predict(self):
-        subprocess.run(["net_segment", "inference", "-c", self.config_path])
+        if DEBUG == 1:
+            subprocess.run(["net_segment", "inference", "-c", self.config_path])
+        else:
+            tmp = os.path.abspath("./models/dense_vnet_abdominal_ct/net_segment.py")
+            subprocess.run(["python", tmp, "inference", "-c", self.config_path])
         return self.output_path
 
     def cleanup(self):
-        shutil.rmtree(UPLOAD_FOLDER)
-        shutil.rmtree(OUTPUT_FOLDER)
+        if os.path.isdir(UPLOAD_FOLDER):
+            shutil.rmtree(UPLOAD_FOLDER)
+        os.mkdir(UPLOAD_FOLDER)
+        if os.path.isdir(OUTPUT_FOLDER):
+            shutil.rmtree(OUTPUT_FOLDER)
+        os.mkdir(OUTPUT_FOLDER)
 
 
-SAVED_CONFIG_PATH = "./models/dense_vnet_abdominal_ct/config.ini"
+SAVED_CONFIG_PATH = os.path.abspath("./models/dense_vnet_abdominal_ct/config.ini")
 abdominal_model = Abdominal_model(SAVED_CONFIG_PATH)
