@@ -106,6 +106,8 @@ The system is designed to enable other systems to integrate. Some current projec
 
 ## A word of warning
 
+
+
 > The system is currently not performing any input validation on the selected imaging
 > studies. There are some known issues that occur when the input images are not fit for
 > the selected pipelines. For instance, when a pelvis DICOM input is selected with the
@@ -123,6 +125,11 @@ which are guaranteed to succeed are:
   * chest
 * `abdominal_organs_segmentation`
   * abdomen
+
+> When hosting the architecture on Azure, beware that all of the services generate a 
+> cost of £1.3 per hour. It is advised to set up auto-shutdown policies through Azure
+> DevTest labs and monitor credit consumption carefully through the cost analysis service.
+
 
 ## Code organisation
 
