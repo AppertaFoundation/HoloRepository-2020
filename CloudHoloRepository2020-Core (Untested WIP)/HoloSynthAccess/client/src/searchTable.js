@@ -15,7 +15,6 @@ class SearchTable extends Component {
       local: false
     };
     this.mySubmitHandler = this.mySubmitHandler.bind(this);
-    this.myAPISubmitHandler = this.myAPISubmitHandler.bind(this);
   }
 
   mySubmitHandler = (event) => {
@@ -27,15 +26,6 @@ class SearchTable extends Component {
 
   }
 
-  myAPISubmitHandler = (event) => {
-    event.preventDefault();
-    this.setState({
-      bodyPart: this.elementm.value,
-      local: false
-    });
-
-
-  }
 
   render() {
     let paramsPass = {

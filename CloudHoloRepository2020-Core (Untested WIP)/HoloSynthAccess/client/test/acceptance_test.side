@@ -1,0 +1,203 @@
+{
+  "id": "0e0decb7-4b6b-4214-80f2-7a5745d53326",
+  "version": "2.0",
+  "name": "HoloSynthAccess",
+  "url": "http://localhost:3005",
+  "tests": [{
+    "id": "dd0da0c3-1945-4cad-a676-a0939e3426fe",
+    "name": "Acceptance test",
+    "commands": [{
+      "id": "4590fa9d-1790-454f-903f-8e301d0ed46a",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c156b1d9-29fe-4ea6-bf05-3adf4b6e6100",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1680x1050",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "52892246-044c-45ec-a0df-6de4e31e3cc6",
+      "comment": "",
+      "command": "click",
+      "target": "css=form > label > input",
+      "targets": [
+        ["css=form > label > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "566a7aae-d4b3-4894-99c0-60472af02bcf",
+      "comment": "",
+      "command": "type",
+      "target": "css=form > label > input",
+      "targets": [
+        ["css=form > label > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "lung"
+    }, {
+      "id": "14e0b421-173a-4d3a-afa3-bb87e14641a5",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "css=form > label > input",
+      "targets": [
+        ["css=form > label > input", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div/form/label/input", "xpath:idRelative"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "e8aa80c8-7bcd-4997-a756-37914194a961",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=3",
+      "targets": [
+        ["linkText=3", "linkText"],
+        ["css=.page-item:nth-child(4) > .page-link", "css:finder"],
+        ["xpath=//a[contains(text(),'3')]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div[3]/div[2]/div/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'3')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4edb2989-a433-4a5e-950a-c6ffbbbee7f7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.dataTables_filter .form-control",
+      "targets": [
+        ["css=.dataTables_filter .form-control", "css:finder"],
+        ["xpath=(//input[@value=''])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div/div[2]/div/label/input", "xpath:idRelative"],
+        ["xpath=//div/label/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ebd6e13b-2a83-4c78-bd15-8e7ec557409a",
+      "comment": "",
+      "command": "type",
+      "target": "css=.dataTables_filter .form-control",
+      "targets": [
+        ["css=.dataTables_filter .form-control", "css:finder"],
+        ["xpath=//input[@value='localizer']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div/div[2]/div/label/input", "xpath:idRelative"],
+        ["xpath=//div/label/input", "xpath:position"]
+      ],
+      "value": "localizer"
+    }, {
+      "id": "92cf24f9-7073-430e-a074-82e43202478e",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(5) .btn-purple",
+      "targets": [
+        ["css=tr:nth-child(5) .btn-purple", "css:finder"],
+        ["xpath=(//a[contains(text(),'Download')])[5]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div[2]/div/div/table/tbody/tr[5]/td[6]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://services.cancerimagingarchive.net/services/v3/TCIA/query/getImage?SeriesInstanceUID=1.3.6.1.4.1.14519.5.2.1.6450.9002.231375308484056068267383321505')]", "xpath:href"],
+        ["xpath=//tr[5]/td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "da94295a-d2c3-44a9-8f39-df13efd85584",
+      "comment": "",
+      "command": "click",
+      "target": "css=.rw-input",
+      "targets": [
+        ["css=.rw-input", "css:finder"],
+        ["xpath=//div[@id='rw_1_input']/div/div", "xpath:idRelative"],
+        ["xpath=//div[2]/div/div[2]/div/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8510555d-d98c-4db7-9d15-6b626b3ca315",
+      "comment": "",
+      "command": "click",
+      "target": "id=rw_1_listbox_active_option",
+      "targets": [
+        ["id=rw_1_listbox_active_option", "id"],
+        ["css=#rw_1_listbox_active_option", "css:finder"],
+        ["xpath=//li[@id='rw_1_listbox_active_option']", "xpath:attributes"],
+        ["xpath=//ul[@id='rw_1_listbox']/li", "xpath:idRelative"],
+        ["xpath=//li", "xpath:position"],
+        ["xpath=//li[contains(.,'BRAIN')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "42cf81ff-ec0b-45fc-87b1-becb59d21773",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(4) .btn-blue",
+      "targets": [
+        ["css=tr:nth-child(4) .btn-blue", "css:finder"],
+        ["xpath=//button[@value='https://services.cancerimagingarchive.net/services/v3/TCIA/query/getImage?SeriesInstanceUID=1.3.6.1.4.1.14519.5.2.1.4591.4001.315548348407673101679579327821']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div[2]/div/div/table/tbody/tr[4]/td[7]/button", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "40d004e0-df28-4cb9-9e34-e2f37db2c284",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=tr:nth-child(4) .btn-blue",
+      "targets": [
+        ["css=tr:nth-child(4) .btn-blue", "css:finder"],
+        ["xpath=//button[@value='https://services.cancerimagingarchive.net/services/v3/TCIA/query/getImage?SeriesInstanceUID=1.3.6.1.4.1.14519.5.2.1.4591.4001.315548348407673101679579327821']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div[2]/div/div/table/tbody/tr[4]/td[7]/button", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2d8291fe-0a46-4562-8d05-a7ed216c470f",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=tr:nth-child(4) .btn-blue",
+      "targets": [
+        ["css=tr:nth-child(4) .btn-blue", "css:finder"],
+        ["xpath=//button[@value='https://services.cancerimagingarchive.net/services/v3/TCIA/query/getImage?SeriesInstanceUID=1.3.6.1.4.1.14519.5.2.1.4591.4001.315548348407673101679579327821']", "xpath:attributes"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div[2]/div[2]/div/div/table/tbody/tr[4]/td[7]/button", "xpath:idRelative"],
+        ["xpath=//tr[4]/td[7]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5e45d2b-1c45-437c-bce0-2a47589ae8d4",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Error with transmission to HoloRepository!",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d4b902f9-e6a1-439c-9dbb-17494f01a78d",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(5) .btn-purple",
+      "targets": [
+        ["css=tr:nth-child(5) .btn-purple", "css:finder"],
+        ["xpath=(//a[contains(text(),'Download')])[5]", "xpath:link"],
+        ["xpath=//div[@id='root']/div/div[2]/div/div[3]/div/div/div[2]/div/div/table/tbody/tr[5]/td[6]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'https://services.cancerimagingarchive.net/services/v3/TCIA/query/getImage?SeriesInstanceUID=1.3.6.1.4.1.14519.5.2.1.4591.4001.288578445537316779323506987711')]", "xpath:href"],
+        ["xpath=//tr[5]/td[6]/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "f88711f1-7013-4e87-b630-e20a3a3c1d0a",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["dd0da0c3-1945-4cad-a676-a0939e3426fe"]
+  }],
+  "urls": ["http://localhost:3005/"],
+  "plugins": []
+}

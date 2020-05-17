@@ -188,6 +188,11 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3100
+        resources:
+          requests:
+            cpu: 250m
+          limits:
+            cpu: 500m
         env:
         - name: APP_PORT
           value: "3100"

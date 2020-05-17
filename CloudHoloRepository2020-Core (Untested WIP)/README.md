@@ -2,8 +2,8 @@
   <img width="300" alt="HoloRepository logo" src="https://user-images.githubusercontent.com/11090412/62009421-f491a400-b156-11e9-98ca-408dc2fab7e8.png">
   <p align="center">
     A system for transforming medical imaging studies such as CT or MRI scans into 3-dimensional holograms, storing data on a cloud-based platform and making it available for other systems. This is the 2020 edition of HoloRepository, which  is an Azure Cloud solution that works with the newly released HoloLens 2 and facilitates cloud storage of 3D models.
+    Note: This edition is still a work in progress.
   </p>
-  
   <p align="center">
     Find out more on the <a href="https://fanbomeng97.github.io/HoloRepository-Website/#/">project website</a>.
   </p>
@@ -33,6 +33,7 @@
   - [Get started](#get-started)
   - [Set up the environment](#set-up-the-environment)
   - [System integration](#system-integration)
+- [Work left to be done](#work-left-to-be-done)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -106,8 +107,6 @@ The system is designed to enable other systems to integrate. Some current projec
 
 ## A word of warning
 
-
-
 > The system is currently not performing any input validation on the selected imaging
 > studies. There are some known issues that occur when the input images are not fit for
 > the selected pipelines. For instance, when a pelvis DICOM input is selected with the
@@ -126,14 +125,9 @@ which are guaranteed to succeed are:
 * `abdominal_organs_segmentation`
   * abdomen
 
-> When hosting the architecture on Azure, beware that all of the services generate a 
-> cost of £1.3 per hour. It is advised to set up auto-shutdown policies through Azure
-> DevTest labs and monitor credit consumption carefully through the cost analysis service.
-
-
 ## Code organisation
 
-Most of the components are kept here in the [Cloud HoloRepository2020-Core](https://github.com/AbhinathK/CloudHoloRepository2020-Core) mono-repository. The sub-directories correspond to sub-components as described above. The only exception are the components that are developed in Unity/C#, they are separately kept in the [HoloRepository-HoloLens](https://github.com/nbckr/HoloRepository-HoloLens) repository.
+The latest code and alternative branches can be accessed in the in the [Cloud HoloRepository2020-Core](https://github.com/AbhinathK/CloudHoloRepository2020-Core) mono-repository. The sub-directories correspond to sub-components as described above. The only exception are the components that are developed in Unity/C#, they are separately kept in the [HoloRepository-HoloLens](https://github.com/nbckr/HoloRepository-HoloLens) repository.
 
 ## Development
 
@@ -208,6 +202,12 @@ Lastly, it is also possible to start the whole system except for one component, 
 ```shell
 $ docker-compose --file docker-compose.dev.yml up --scale holostorage-accessor=0
 ```
+
+## Work left to be done
+1. Testing if brain pipeline can be hosted on Azure Kubernetes Service with current configuration. It may require upgrading the virtual machine to a GPU-enabled instance in the Kubernetes node cluster. Changes have already been made to the deployment configuration file under Misc/deployment/az_kubernetes_setup
+2. Integrating the new kidney pipeline, which will require modifying the aforementioned deployment file by mapping the appropriate ports and linking to Docker image in Azure Container Registry. Instructions are included in Misc/deployment/az_kubernetes_setup
+3. Redeployment of new architecture on Azure. Follow instructions included in Misc/deployment/
+4. A single click to deploy to Azure infrastructure should be built. This would allow a button in the README.md of the repository to direct users to a streamlined deployment process using Azure Resource Manager. 
 
 ## Contributing
 

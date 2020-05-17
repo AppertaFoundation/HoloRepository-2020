@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component Renders correctly 1`] = `
+<div>
+  <LoadingIndicator />
+  <DataTable
+    autoWidth={false}
+    barReverse={false}
+    bordered={true}
+    borderless={false}
+    btn={false}
+    dark={false}
+    data={Object {}}
+    disableRetreatAfterSorting={false}
+    displayEntries={true}
+    entries={10}
+    entriesLabel="Show entries"
+    entriesOptions={
+      Array [
+        10,
+        20,
+        50,
+        100,
+      ]
+    }
+    exportToCSV={false}
+    fixed={false}
+    hover={false}
+    info={true}
+    infoLabel={
+      Array [
+        "Showing",
+        "to",
+        "of",
+        "entries",
+      ]
+    }
+    noBottomColumns={false}
+    noRecordsFoundLabel="No matching records found"
+    order={Array []}
+    pagesAmount={8}
+    paginationLabel={
+      Array [
+        "Previous",
+        "Next",
+      ]
+    }
+    paging={true}
+    responsive={false}
+    responsiveLg={false}
+    responsiveMd={false}
+    responsiveSm={false}
+    responsiveXl={false}
+    scrollX={false}
+    scrollY={false}
+    searchLabel="Search"
+    searching={true}
+    small={true}
+    sortable={true}
+    striped={true}
+    tbodyColor=""
+    tbodyTextWhite={false}
+    theadColor=""
+    theadTextWhite={false}
+  />
+</div>
+`;

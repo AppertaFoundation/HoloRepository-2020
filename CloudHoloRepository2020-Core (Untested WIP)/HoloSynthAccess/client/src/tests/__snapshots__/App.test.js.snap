@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component Renders correctly 1`] = `
+<div
+  className="canvas"
+>
+  <div
+    className="header-container"
+  >
+    HoloSynthAccess
+  </div>
+  <div
+    className="main-container"
+  >
+    <SearchTable />
+  </div>
+</div>
+`;

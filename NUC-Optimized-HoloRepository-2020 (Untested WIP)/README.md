@@ -1,7 +1,7 @@
 <p align="center">
   <img width="300" alt="HoloRepository logo" src="https://user-images.githubusercontent.com/11090412/62009421-f491a400-b156-11e9-98ca-408dc2fab7e8.png">
   <p align="center">
-The HoloRepository 2020 is Proof of Concept is an open source FHIR enabled research project that enables CT and MRI DICOM scans of the brain, lungs, chest, and abdomen to be rendered as a 3D view using the latest techniques for organ segmentation. HoloRepository 2020 for NUCs is an optimised build for clinical Intel(™) NUCs that can show 3D views and simulate a local FHIR enabled database for researchers looking to explore experimental results.
+The HoloRepository 2020 is Proof of Concept is an open source FHIR enabled research project that enables CT and MRI DICOM scans of the brain, lungs, chest, and abdomen to be rendered as a 3D view using the latest techniques for organ segmentation. HoloRepository 2020 for NUCs is an optimised build for clinical Intel(™) NUCs that can show 3D views and simulate a local FHIR enabled database for researchers looking to explore experimental results. Note: This edition is still a work in progress.
   </p>
   
   <p align="center">
@@ -33,6 +33,7 @@ The HoloRepository 2020 is Proof of Concept is an open source FHIR enabled resea
   - [Get started](#get-started)
   - [Set up the environment](#set-up-the-environment)
   - [System integration](#system-integration)
+- [Work left to be done](#work-left-to-be-done)
 - [Contributing](#contributing)
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -123,7 +124,7 @@ which are guaranteed to succeed are:
 
 ## Code organisation
 
-Most of the components are kept here in the [NUC-Optimized-HoloRepository-Core](https://github.com/AbhinathK/NUC-Optimized-HoloRepository-2020) mono-repository. The sub-directories correspond to sub-components as described above. The only exception are the components that are developed in Unity/C#, they are separately kept in the [HoloRepository-HoloLens](https://github.com/nbckr/HoloRepository-HoloLens) repository.
+The latest code and alternative branches can be accessed in the [NUC-Optimized-HoloRepository-Core](https://github.com/AbhinathK/NUC-Optimized-HoloRepository-2020) mono-repository. The sub-directories correspond to sub-components as described above. The only exception are the components that are developed in Unity/C#, they are separately kept in the [HoloRepository-HoloLens](https://github.com/nbckr/HoloRepository-HoloLens) repository.
 
 ## Development
 
@@ -201,6 +202,13 @@ Lastly, it is also possible to start the whole system except for one component, 
 ```shell
 $ docker-compose -f deployment.yml up --scale holostorage-accessor=0
 ```
+# Work left to be done
+1. Testing and deployment of new architecture on an Intel NUC. This will require cloning the repository on the machine and following the instructions above.
+>Warning: Services such as the fhir server may not function, as it has not been tested
+2. Testing implementation of the FHIR service. Before testing, mount the volume of the SQL container for persistant storage.
+3. Testing if the newly integrated brain pipeline functions
+2. Integrating the new kidney pipeline, which will require modifying the deployment file by mapping the appropriate ports and linking to Docker file in the associated directory. Follow the same linking convention as other containers
+3. Deployment of an Azure Blob Storage is still necessary. Follow instructions under Misc/az_blob_storage. This cloud dependency should be removed and local storage of models and imaging studies should be explored.
 
 ## Contributing
 
