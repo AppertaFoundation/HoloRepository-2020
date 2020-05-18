@@ -101,7 +101,7 @@ To run the test, you need the run the latest Accessor server. then in the Unity 
 To find more information of the testing in Unity, you could access the [Unity Manual](https://docs.unity3d.com/Manual/testing-editortestsrunner.html) website.
 
 ## Code organisation
-The rest of the components of the overall project are kept in the [HoloRepository-Core](https://github.com/AppertaFoundation/HoloRepository-2020/tree/master/CloudHoloRepository2020-Core%20(Untested%20WIP)) mono-repository. The only exception are the components that are developed in Unity/C#, they are separately kept in this [HoloRepository-HoloLens](https://github.com/AppertaFoundation/HoloRepository-2020/tree/master/HoloRepository-HoloLens-dev) repository. The original repository with alternative branches can be accessed in this [Original-HoloRepository-HoloLens](https://github.com/nbckr/HoloRepository-HoloLens)
+The rest of the components of the overall project are kept in the [HoloRepository-Core](https://github.com/AppertaFoundation/HoloRepository-2020/tree/master/CloudHoloRepository2020-Core%20(Untested%20WIP)) mono-repository. The only exception are the components that are developed in Unity/C#, they are separately kept in this [HoloRepository-HoloLens](https://github.com/AppertaFoundation/HoloRepository-2020/tree/master/HoloRepository-HoloLens-dev) repository. The original repository with alternative branches can be accessed in this [Original-HoloRepository-HoloLens](https://github.com/nbckr/HoloRepository-HoloLens) repository.
 
 ## Contact and support
 This component is owned by [fanbomeng97](https://github.com/fanbomeng97). Please get in touch if you have any questions. For change requests and bug reports, please open a new issue.
