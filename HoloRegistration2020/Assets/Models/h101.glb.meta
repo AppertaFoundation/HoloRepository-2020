@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: f53b15dfc4063314886c826a50070f99
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: main/Node
+    400000: main/Node/Transform
+    2100000: default
+    2300000: main/Node/MeshRenderer
+    3300000: main/Node/MeshFilter
+    4300000: Node-Mesh
+    100100000: main
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 768a5a18fd6eb914f980bf85dd7b34ec, type: 3}

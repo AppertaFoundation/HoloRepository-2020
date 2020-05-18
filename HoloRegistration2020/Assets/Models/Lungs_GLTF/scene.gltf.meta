@@ -1,0 +1,85 @@
+fileFormatVersion: 2
+guid: 4b616e336664819459c34e1d2cef23ac
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: main/RootNode (gltf orientation matrix)
+    100002: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)
+    100004: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles
+    100006: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node3
+    100008: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node4
+    100010: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node5
+    100012: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node6
+    100014: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node7
+    100016: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node8
+    100018: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node9
+    100020: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node10
+    100022: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node11
+    100024: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node12
+    100026: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node13
+    100028: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node14
+    400000: main/RootNode (gltf orientation matrix)/Transform
+    400002: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/Transform
+    400004: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/Transform
+    400006: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node3/Transform
+    400008: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node4/Transform
+    400010: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node5/Transform
+    400012: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node6/Transform
+    400014: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node7/Transform
+    400016: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node8/Transform
+    400018: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node9/Transform
+    400020: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node10/Transform
+    400022: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node11/Transform
+    400024: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node12/Transform
+    400026: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node13/Transform
+    400028: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node14/Transform
+    2100000: Scene_-_Root
+    2300000: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node3/MeshRenderer
+    2300002: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node4/MeshRenderer
+    2300004: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node5/MeshRenderer
+    2300006: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node6/MeshRenderer
+    2300008: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node7/MeshRenderer
+    2300010: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node8/MeshRenderer
+    2300012: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node9/MeshRenderer
+    2300014: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node10/MeshRenderer
+    2300016: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node11/MeshRenderer
+    2300018: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node12/MeshRenderer
+    2300020: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node13/MeshRenderer
+    2300022: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node14/MeshRenderer
+    3300000: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node3/MeshFilter
+    3300002: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node4/MeshFilter
+    3300004: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node5/MeshFilter
+    3300006: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node6/MeshFilter
+    3300008: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node7/MeshFilter
+    3300010: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node8/MeshFilter
+    3300012: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node9/MeshFilter
+    3300014: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node10/MeshFilter
+    3300016: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node11/MeshFilter
+    3300018: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node12/MeshFilter
+    3300020: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node13/MeshFilter
+    3300022: main/RootNode (gltf orientation matrix)/RootNode (model correction matrix)/lung1.stl.cleaner.materialmerger.gles/node14/MeshFilter
+    4300000: mesh0
+    4300002: mesh1
+    4300004: mesh2
+    4300006: mesh3
+    4300008: mesh4
+    4300010: mesh5
+    4300012: mesh6
+    4300014: mesh7
+    4300016: mesh8
+    4300018: mesh9
+    4300020: mesh10
+    4300022: mesh11
+    100100000: main
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 1fa4dafe23771ae498589f7f7c22c974, type: 3}
+  importSettings:
+    materials: 1
+    shaderOverrides:
+      metallic: {fileID: 4800000, guid: 057d08f5d01be134593d0fe0e40c1759, type: 3}
+      metallicBlend: {fileID: 4800000, guid: 7258d825fa9aac6439f21eb173b880c6, type: 3}
+      specular: {fileID: 4800000, guid: d28fc76bfd3057e4c8f1c6f0b91590c8, type: 3}
+      specularBlend: {fileID: 4800000, guid: 475158e3052e5c4488fa32f8df9d7be7, type: 3}
+    useLegacyClips: 0
