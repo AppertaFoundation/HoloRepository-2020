@@ -42,33 +42,61 @@ namespace HoloStorageConnector
         /// Initialize transform settings of the gameobject
         /// </summary>
         /// <param name="gameobject">The loaded GameObject</param>
-        public static void Initialize(GameObject gameobject, HologramInstantiationSettings setting)
+        public static void Initialize(GameObject gameobject1, HologramInstantiationSettings setting)
         {
-            gameobject.name = setting.Name;
-
-            Mesh mesh = gameobject.GetComponentsInChildren<MeshFilter>()[0].sharedMesh;
-            float max = Math.Max(Math.Max(mesh.bounds.size.x, mesh.bounds.size.y), mesh.bounds.size.z);
-            
-            float scaleSize = setting.Size / max;
-            gameobject.transform.localScale = new Vector3(scaleSize, scaleSize, scaleSize);
-
-            Vector3 initialPosition = new Vector3(mesh.bounds.center.x , -mesh.bounds.center.y, mesh.bounds.center.z) * scaleSize;
-            gameobject.transform.position = initialPosition + setting.Position;
-
-            gameobject.transform.eulerAngles = setting.Rotation;
-
-            if (setting.Manipulable)
+            gameobject1.name = setting.Name;
+            for (int i = 0;i < gameobject1.transform.childCount; i++)
             {
-                gameobject.AddComponent<BoundingBox>();
-                gameobject.AddComponent<ManipulationHandler>();
-            }
+                GameObject gameobject = gameobject1.transform.GetChild(i).gameObject;
+                Debug.Log(gameobject.name);
 
+                foreach (MeshFilter meshFilter in gameobject.GetComponentsInChildren<MeshFilter>())
+                {
+                    Mesh mesh2 = meshFilter.sharedMesh;
+                    mesh2.RecalculateNormals();
+                }
+                foreach (Renderer renderer in gameobject.GetComponentsInChildren<Renderer>())
+
+                {
+					
+					//This code changes the render mode at runtime, to allow the shader to use the transparency information
+                    //https://forum.unity.com/threads/change-standard-shader-render-mode-in-runtime.318815/
+
+                    Material material = renderer.material;
+                    material.SetOverrideTag("RenderType", "Transparent");
+                    material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+                    material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+                    material.SetInt("_ZWrite", 0);
+                    material.DisableKeyword("_ALPHATEST_ON");
+                    material.EnableKeyword("_ALPHABLEND_ON");
+                    material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+                    material.renderQueue = (int)UnityEngine.Rendering.RenderQueue.Transparent;
+                }
+
+                Mesh mesh = gameobject.GetComponentsInChildren<MeshFilter>()[0].sharedMesh;
+                mesh.RecalculateNormals();
+                float max = Math.Max(Math.Max(mesh.bounds.size.x, mesh.bounds.size.y), mesh.bounds.size.z);
+
+                float scaleSize = setting.Size / max;
+                gameobject.transform.localScale = new Vector3(scaleSize, scaleSize, scaleSize);
+
+                Vector3 initialPosition = new Vector3(mesh.bounds.center.x, -mesh.bounds.center.y, mesh.bounds.center.z) * scaleSize;
+                gameobject.transform.position = initialPosition + setting.Position;
+
+                gameobject.transform.eulerAngles = setting.Rotation;
+
+                if (setting.Manipulable)
+                {
+                    gameobject.AddComponent<BoundingBox>();
+                    gameobject.AddComponent<ManipulationHandler>();
+                }
+            }
             if (setting.SceneName != null)
             {
                 try
                 {
                     Scene HologramDisplayScene = SceneManager.GetSceneByName(setting.SceneName);
-                    SceneManager.MoveGameObjectToScene(gameobject, HologramDisplayScene);
+                    SceneManager.MoveGameObjectToScene(gameobject1, HologramDisplayScene);
                 }
                 catch (Exception e)
                 {
